@@ -48,7 +48,7 @@ This system mimics the mechanics of a rewards platform where users gain utility 
 - **Time-gated rewards** to simulate a realistic yield farming model.
 - **Gas-efficient reward claims** by checking eligibility only after full-day cycles.
 - **Modular structure**: reward logic is separated for reusability and extensibility.
-- **UX enhancement**: Read-only functions (`pendingRewards`, `getUserStatus`) support frontends in delivering live status updates without extra costs.
+- **UX enhancement**: Read-only functions (`pendingRewards`) support frontends in delivering live status updates without extra costs.
 
 ---
 
@@ -69,3 +69,15 @@ cd asset-manager
 cd frontend
 npm install
 npm run dev
+
+---
+## ⚙️ Testing Contract
+
+```bash
+git clone https://github.com/nanasark/asset-manager
+cd asset-manager
+cd blockchain
+npm install
+npx hardhat test
+
+
