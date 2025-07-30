@@ -167,7 +167,7 @@ REWARD_TOKEN_ADDRESS: 0x...`}
           <h3 className="text-lg font-mono text-orange-400 mb-1">fundRewardPool(uint256 amount)</h3>
           <p className="mb-2 text-sm text-gray-600">
           Admin uses this function to deposit poolRewards in the contract.
-          
+
           </p>
           <pre className="bg-zinc-900 p-4 text-sm rounded-md border border-zinc-700 text-green-300 overflow-x-auto mb-6">
             {`function fundRewardPool(uint256 amount) external onlyOwner {
@@ -196,9 +196,9 @@ REWARD_TOKEN_ADDRESS: 0x...`}
           </div>
 
           <h3 className="text-lg font-mono mb-2 text-violet-400">Owner Testing</h3>
-          <p className="mb-2 text-sm text-gray-600">
+          {/* <p className="mb-2 text-sm text-gray-600">
             Owner address: <span className="text-orange-400 font-mono">0x1E2c6319d68db43DF109CBbA89b855F505aC6904</span>
-          </p>
+          </p> */}
           <ul className="list-disc ml-6 text-sm text-gray-400 mb-4">
             <li>Admin mint shows up in RGT Token tab</li>
             <li>Reward pool funding shows up in Asset Manager tab</li>
@@ -234,7 +234,7 @@ REWARD_TOKEN_ADDRESS: 0x...`}
         {/* How Rewards Work */}
         <div className="mb-8">
           <h2 className="text-xl font-mono mb-4 text-green-400">How Rewards Work</h2>
-          <p className="mb-4 text-gray-600">Simple math:</p>
+          
           <div className="bg-zinc-900 p-4 rounded-md border border-green-500/30">
             <pre className="text-sm text-green-300">
 {`// Every day, each asset earns 0.1 RWT
