@@ -164,6 +164,58 @@ REWARD_TOKEN_ADDRESS: 0x...`}
 }`}
           </pre>
 
+        <h3 className="text-lg font-mono text-orange-400 mb-1">withdrawPool(uint256 amount)</h3>
+        <p className="mb-2 text-sm text-gray-600">
+          Allows the contract <b>owner</b> to withdraw a specific amount of tokens from the reward pool.
+        </p>
+        <p className="mb-2 text-sm text-gray-600">
+          <b className="text-violet-800">Reasoning</b>:
+          This function is useful for managing excess or unused rewards in the pool, allowing the owner to reclaim unused tokens.
+        </p>
+        <pre className="bg-zinc-900 p-4 text-sm rounded-md border border-zinc-700 text-green-300 overflow-x-auto mb-6">
+        {`function withdrawPool(uint256 amount) external onlyOwner {
+            uint256 rewardBalance = rewardToken.balanceOf(address(this));
+            require(rewardBalance >= amount, "Insufficient balance");
+
+            bool success = rewardToken.transfer(msg.sender, amount);
+            require(success, "Withdraw failed");
+
+            emit PoolWithdrawn(amount);
+        }`}
+        </pre>
+
+        <h3 className="text-lg font-mono text-orange-400 mb-1">withdrawDeposits(address to, uint256 amount)</h3>
+        <p className="mb-2 text-sm text-gray-600">
+          Allows the <b>owner</b> to withdraw a specific amount of RGT tokens that were deposited by users.
+        </p>
+        <p className="mb-2 text-sm text-gray-600">
+          <b className="text-violet-800">Reasoning</b>:
+          In case tokens need to be migrated, refunded, or repurposed, this function provides controlled access for withdrawal by the owner.
+        </p>
+        <pre className="bg-zinc-900 p-4 text-sm rounded-md border border-zinc-700 text-green-300 overflow-x-auto mb-6">
+        {`function withdrawDeposits(address to, uint256 amount) external onlyOwner {
+            require(rgtToken.balanceOf(address(this)) >= amount, "Insufficient balance");
+            rgtToken.transfer(to, amount);
+        }`}
+        </pre>
+
+        <h3 className="text-lg font-mono text-orange-400 mb-1">emergencyWithdrawAllDeposits(address to)</h3>
+        <p className="mb-2 text-sm text-gray-600">
+          Allows the <b>owner</b> to withdraw all RGT tokens from the contract in case of an emergency.
+        </p>
+        <p className="mb-2 text-sm text-gray-600">
+          <b className="text-violet-800">Reasoning</b>:
+          This function is designed for safety and recovery purposes. In case of critical failure or shutdown, the owner can recover all user deposits from the contract.
+        </p>
+        <pre className="bg-zinc-900 p-4 text-sm rounded-md border border-zinc-700 text-green-300 overflow-x-auto mb-6">
+        {`function emergencyWithdrawAllDeposits(address to) external onlyOwner {
+            uint256 balance = rgtToken.balanceOf(address(this));
+            require(balance > 0, "Nothing to withdraw");
+            rgtToken.transfer(to, balance);
+        }`}
+        </pre>
+
+
           <h3 className="text-lg font-mono text-orange-400 mb-1">fundRewardPool(uint256 amount)</h3>
           <p className="mb-2 text-sm text-gray-600">
           Admin uses this function to deposit poolRewards in the contract.
@@ -214,18 +266,18 @@ REWARD_TOKEN_ADDRESS: 0x...`}
             <div className="bg-zinc-900 p-4 rounded-md border border-red-500/30">
               <h3 className="text-lg font-mono mb-2 text-red-400">Deposit Problems</h3>
               <ul className="list-disc ml-6 text-sm text-gray-400 space-y-1">
-                <li>Must approve before deposit (two-step process)</li>
-                <li>Only multiples of 10 work (10, 20, 50, 100...)</li>
-                <li>Need enough RGT balance</li>
+                <li>Make sure to approve RGT tokens first before depositing (two-step process)</li>
+                <li>Only amounts in multiples of 10 (like 10, 20, 50…) are accepted.</li>
+                <li>Check that you have enough RGT balance before depositing.</li>
               </ul>
             </div>
 
             <div className="bg-zinc-900 p-4 rounded-md border border-yellow-500/30">
               <h3 className="text-lg font-mono mb-2 text-yellow-400">Claim Problems</h3>
               <ul className="list-disc ml-6 text-sm text-gray-400 space-y-1">
-                <li>24-hour wait after deposit or last claim</li>
-                <li>Pool might be empty (owner needs to fund it)</li>
-                <li>If you've never deposited, nextClaimTime returns 0</li>
+                <li>You need to wait 24 hours after your first deposit or last claim.</li>
+                <li>If the reward pool is empty, the owner must fund it first.</li>
+                <li>If you have never deposited, nextClaimTime will show 0</li>
               </ul>
             </div>
           </div>
