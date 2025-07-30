@@ -33,7 +33,7 @@ export default function ConnectButton() {
     return (
       <button
         onClick={() => disconnect()}
-        className="flex items-center px-4 py-2 text-sm font-medium text-orange-600 bg-white border border-orange-200 rounded-lg hover:bg-orange-50 transition-colors"
+        className="cursor-pointer flex items-center px-4 py-2 text-sm font-medium text-orange-600 bg-white border border-orange-200 rounded-lg hover:bg-orange-50 transition-colors"
       >
         <LogOut className="w-4 h-4 mr-2" />
         Disconnect
@@ -49,16 +49,16 @@ export default function ConnectButton() {
       <button
         onClick={() => setIsOpen(!isOpen)}
         disabled={isPending}
-        className="flex items-center px-6 py-3 text-white bg-gradient-to-r from-orange-400 to-orange-500 hover:from-orange-500 hover:to-orange-600 rounded-lg shadow-lg transition-all duration-200 disabled:opacity-50"
+        className="cursor-pointer flex items-center px-6 py-3 text-white bg-gradient-to-r from-orange-400 to-orange-500 hover:from-orange-500 hover:to-orange-600 rounded-lg shadow-lg transition-all duration-200 disabled:opacity-50"
       >
-        <Wallet className="w-4 h-4 mr-2" />
+        <Wallet className="  w-4 h-4 mr-2" />
         Connect Wallet
         <ChevronDown className="w-4 h-4 ml-2" />
       </button>
 
       {isOpen && (
         <>
-          <div className="fixed inset-0 z-10" onClick={() => setIsOpen(false)} />
+          <div className="cursor-pointer fixed inset-0 z-10" onClick={() => setIsOpen(false)} />
           <div className="absolute right-0 top-12 w-56 bg-white border border-orange-100 rounded-lg shadow-xl z-50">
             {filteredConnectors.length === 0 ? (
               <div className="px-4 py-3 text-gray-500">No wallets available</div>

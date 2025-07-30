@@ -100,7 +100,7 @@ export default function TokenManager() {
           <button
             onClick={handleMint}
             disabled={!canMint || isMintLoading}
-            className="w-full px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 disabled:bg-gray-300"
+            className="cursor-pointer w-full px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 disabled:bg-gray-300"
           >
             {isMintLoading ? "Minting..." : "Mint 100 RGT"}
           </button>
@@ -127,7 +127,7 @@ export default function TokenManager() {
               <button
                 onClick={handleAdminMint}
                 disabled={!mintToAddress || !mintAmount || isAdminMintLoading}
-                className="w-full px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 disabled:bg-gray-300"
+                className="cursor-pointer w-full px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 disabled:bg-gray-300"
               >
                 {isAdminMintLoading ? "Minting..." : "Admin Mint"}
               </button>

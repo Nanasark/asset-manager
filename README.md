@@ -6,7 +6,7 @@
 
 ## 🌍 Live Preview
 
-- 🔗 Frontend: [https://rgtasset-manager.vercel.app](https://rgtasset-manager.vercel.app)
+- 🔗 Frontend: [https://asset-manager-gamma.vercel.app/](https://asset-manager-gamma.vercel.app/)
 - 📁 GitHub Repo: [https://github.com/nanasark/asset-manager](https://github.com/nanasark/asset-manager)
 
 ---

@@ -305,14 +305,14 @@ export default function AssetManager() {
               <button
                 onClick={handleApprove}
                 disabled={!depositAmount || isApproveLoading || isApproved}
-                className="flex-1 px-4 py-2 text-orange-600 border border-orange-200 rounded-lg hover:bg-orange-50 disabled:bg-gray-100"
+                className="cursor-pointer flex-1 px-4 py-2 text-orange-600 border border-orange-200 rounded-lg hover:bg-orange-50 disabled:bg-gray-100"
               >
                 {isApproveLoading ? "Approving..." : "Approve"}
               </button>
               <button
                 onClick={handleDeposit}
                 disabled={!depositAmount || isDepositLoading || !isApproved}
-                className="flex-1 px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 disabled:bg-gray-300"
+                className="cursor-pointer flex-1 px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 disabled:bg-gray-300"
               >
                 {isDepositLoading ? "Depositing..." : "Deposit"}
               </button>
@@ -333,7 +333,7 @@ export default function AssetManager() {
               Number(pendingRewards) === 0 ||
               isClaimLoading 
             }
-            className="w-full px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 disabled:bg-gray-300"
+            className="w-full px-4 py-2 cursor-pointer bg-green-500 text-white rounded-lg hover:bg-green-600 disabled:bg-gray-300"
           >
             {isClaimLoading
               ? "Claiming..."
@@ -382,7 +382,7 @@ export default function AssetManager() {
                 <button
                   onClick={handleFundPool}
                   disabled={!fundAmount || isFundLoading}
-                  className="flex-1 px-4 py-2 text-gray-600 border border-gray-200 rounded-lg hover:bg-gray-50 disabled:bg-gray-100"
+                  className="cursor-pointer flex-1 px-4 py-2 text-gray-600 border border-gray-200 rounded-lg hover:bg-gray-50 disabled:bg-gray-100"
                 >
                   {isFundLoading ? "Funding..." : "Fund Pool"}
                 </button>
