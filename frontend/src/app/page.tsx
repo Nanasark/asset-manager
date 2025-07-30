@@ -21,7 +21,7 @@ export default function Home() {
             </div>
             <h2 className="text-2xl font-bold text-gray-900 mb-4">Welcome to Asset Manager</h2>
             <p className="text-gray-600 max-w-md mx-auto">
-              Connect your wallet to manage RGT tokens and earn RWT rewards.
+              Connect your wallet to deposit RGT tokens and earn RWT rewards.
             </p>
           </div>
         ) : (
