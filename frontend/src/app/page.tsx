@@ -29,7 +29,7 @@ export default function Home() {
             <div className="flex space-x-2 bg-white/80 backdrop-blur-sm p-2 rounded-lg mb-8 border border-gray-200">
               <button
                 onClick={() => setActiveTab("asset")}
-                className={`hover:cursor-auto flex-1 flex items-center justify-center px-4 py-2 rounded-lg transition-colors ${
+                className={`cursor-pointer flex-1 flex items-center justify-center px-4 py-2 rounded-lg transition-colors ${
                   activeTab === "asset" ? "bg-green-500 text-white" : "text-gray-600 hover:bg-white"
                 }`}
               >
@@ -38,7 +38,7 @@ export default function Home() {
               </button>
               <button
                 onClick={() => setActiveTab("token")}
-                className={` hover:cursor-auto flex-1 flex items-center justify-center px-4 py-2 rounded-lg transition-colors ${
+                className={`cursor-pointer flex-1 flex items-center justify-center px-4 py-2 rounded-lg transition-colors ${
                   activeTab === "token" ? "bg-orange-500 text-white" : "text-gray-600 hover:bg-white"
                 }`}
               >
