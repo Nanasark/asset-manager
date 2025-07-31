@@ -32,12 +32,16 @@ describe("AssetManager", function () {
     await assetManager.connect(user).deposit(ethers.parseEther("100"), user.address);
     const asset = await assetManager.assetStorage(user.address);
     expect(asset.totalAssets).to.equal(10);
+    const contractBalance = await rgtToken.balanceOf(assetManager.target)
+    console.log(contractBalance)
   });
 
   it("should reject deposit less than 10 tokens", async function () {
     await expect(
       assetManager.connect(user).deposit(ethers.parseEther("2"), user.address)
     ).to.be.revertedWith("invalid amount");
+       const contractBalance = await rgtToken.balanceOf(assetManager.target)
+    console.log(contractBalance)
   });
 
   it("should reject deposit not multiple of 10", async function () {
@@ -133,14 +137,15 @@ describe("AssetManager", function () {
     ).to.be.revertedWith("Insufficient pool");
   });
 
-  // it("should allow owner to withdraw all rgt deposits", async function () {
-  //   const initialOwnerBalance = await rgtToken.balanceOf(owner.address);
-    
-  //   await assetManager.connect(owner).emergencyWithdrawAllDeposits(owner.address);
+  it("should allow owner to withdraw all rgt deposits", async function () {
+    await assetManager.connect(user).deposit(ethers.parseEther("100"), user.address);
+    const initialOwnerBalance = await rgtToken.balanceOf(owner.address);
+    const contractBalance = await rgtToken.balanceOf(assetManager.target)
+    await assetManager.connect(owner).emergencyWithdrawAllDeposits(owner.address);
 
-  //   const finalOwnerBalance = await rgtToken.balanceOf(owner.address);
-  //   expect(finalOwnerBalance).to.equal(initialOwnerBalance.add(ethers.parseEther("1000")));
-  // });
+    const finalOwnerBalance = await rgtToken.balanceOf(owner.address);
+    expect(finalOwnerBalance).to.equal(initialOwnerBalance + contractBalance);
+  });
 
   it("should not allow non-owner to withdraw from reward pool", async function () {
     await expect(
@@ -154,18 +159,4 @@ describe("AssetManager", function () {
     ).to.be.revertedWith("Insufficient balance");
   });
 
-
-
-  // it("should reflect reduced rewards after withdrawal", async function () {
-  //   await ethers.provider.send("evm_increaseTime", [86400]); // 1 day
-  //   await ethers.provider.send("evm_mine", []);
-
-  //   await assetManager.connect(user).withdrawDeposits(ethers.parseEther("50")); 
-
-  //   await ethers.provider.send("evm_increaseTime", [86400]); 
-  //   await ethers.provider.send("evm_mine", []);
-
-  //   const rewards = await assetManager.pendingRewards(user.address);
-  //   expect(rewards).to.equal(ethers.parseEther("1")); 
-  // });
 });
