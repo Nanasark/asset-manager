@@ -2,8 +2,9 @@
 pragma solidity ^0.8.28;
 
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
 
-contract AssetManager {
+contract AssetManager is ReentrancyGuard {
     IERC20 public rgtToken;
     IERC20 public rewardToken;
     address private owner;
@@ -37,16 +38,17 @@ contract AssetManager {
         owner = msg.sender;
     }
 
-    function deposit(uint256 tokenAmount, address assetholder) public {
+    function deposit(uint256 tokenAmount, address assetholder) public nonReentrant() {
         require(tokenAmount >= (10 * 1e18), "invalid amount");
         require(tokenAmount % (10 * 1e18) == 0, "Amount should be multiples of 10");
         require(rgtToken.transferFrom(msg.sender, address(this), tokenAmount), "Transfer failed");
         Asset storage holder = assetStorage[msg.sender];
-
+        rewardCalculator(msg.sender);
         if (holder.lastRewardTime == 0) {
             holder.lastRewardTime = block.timestamp;
         }       
 
+        rewardCalculator(msg.sender);
         uint256 assetAmount = tokenAmount / (10 * 1e18);
         createAsset(assetholder, assetAmount);
 
@@ -84,7 +86,7 @@ contract AssetManager {
         return assetStorage[holder].totalAssets * daysPassed * 0.1 ether;
     }
 
-    function claimReward() external {
+    function claimReward() external nonReentrant(){
         rewardCalculator(msg.sender);
         uint256 claimable = assetStorage[msg.sender].claimableAmount;
         require(claimable > 0, "Nothing to claim");

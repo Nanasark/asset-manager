@@ -1052,5 +1052,7 @@ export const REWARD_TOKEN_ABI =[
 ] as const
 
 export const RGT_TOKEN_ADDRESS = "0xe38d1d31e6b75a95516857ce5badbf70c5464cd7" as const
-export const ASSET_MANAGER_ADDRESS = "0xb90b0ff628e16d2ecd2a303210d87963e3e326b4" as const
+export const ASSET_MANAGER_ADDRESS = "0xc05e110eaea5536925a9ee32bbe9df42136a1499" as const
 export const REWARD_TOKEN_ADDRESS = "0x46aa26bdca96fa57025c3d6a067e82e3e65d53f3" as const 
+
+// 0xb90b0ff628e16d2ecd2a303210d87963e3e326b4

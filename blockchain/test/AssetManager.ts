@@ -91,7 +91,7 @@ describe("AssetManager", function () {
 
     const rwtBalance = await rewardToken.balanceOf(user.address);
     expect(rwtBalance).to.equal(ethers.parseEther("1"));
-
+    
     const claimable = await assetManager.assetStorage(user.address).then((a: any) => a.claimableAmount);
     expect(claimable).to.equal(0);
   });
