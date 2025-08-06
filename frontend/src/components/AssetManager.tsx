@@ -205,6 +205,7 @@ export default function AssetManager() {
     amount: depositAmount,
   })
 
+ const AmountToClaim = assetData? Number(formatEther(assetData?.claimableAmount)): 0
 
   const nextRewardUpdate = useCountdown(Number(nextClaimTime!))
   return (
@@ -250,7 +251,8 @@ export default function AssetManager() {
               <h3 className="text-lg font-semibold">Pending Rewards</h3>
             </div>
             <div className="text-2xl font-bold text-green-600">
-              {pendingRewards ? formatEther(pendingRewards) : "0"} RWT
+              
+              {AmountToClaim >0 ? AmountToClaim.toFixed(2) : pendingRewards? formatEther(pendingRewards): "0.00"} RWT
             </div>
             <p className="text-sm text-gray-600">Available to claim</p>
             {!isFirstDeposit && nextClaimTime && Number(nextClaimTime) > Date.now() / 1000 && (
@@ -329,17 +331,16 @@ export default function AssetManager() {
           <button
             onClick={handleClaimReward}
             disabled={
-              !pendingRewards ||
-              Number(pendingRewards) === 0 ||
+               AmountToClaim <=0 ||
               isClaimLoading 
             }
             className="w-full px-4 py-2 cursor-pointer bg-green-500 text-white rounded-lg hover:bg-green-600 disabled:bg-gray-300"
           >
             {isClaimLoading
               ? "Claiming..."
-              : nextClaimTime && Number(nextClaimTime) > Date.now() / 1000
+              : nextClaimTime && Number(nextClaimTime) > Date.now() / 1000 &&  AmountToClaim <=0
                 ? "Claim Available Soon"
-                : `Claim ${pendingRewards ? Number(formatEther(pendingRewards)).toFixed(2) : "0.00"} RWT`}
+                : `Claim ${ AmountToClaim.toFixed(2)} RWT`}
           </button>
 
           {!isFirstDeposit && nextClaimTime && Number(nextClaimTime) > Date.now() / 1000 && (
